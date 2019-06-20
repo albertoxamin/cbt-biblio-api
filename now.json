@@ -1,0 +1,22 @@
+{
+	"name": "cbt-biblio-api",
+	"version": 2,
+	"builds": [
+		{
+			"src": "api.js",
+			"use": "@now/node",
+			"config": {
+				"maxLambdaSize": "40mb"
+			}
+		}
+	],
+	"routes": [
+		{
+			"src": "/myloans",
+			"dest": "/api.js"
+		}
+	],
+	"regions": [
+		"bru"
+	]
+}

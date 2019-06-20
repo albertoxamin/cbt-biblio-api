@@ -1,0 +1,11 @@
+{
+	"name": "cbt-biblio-api",
+	"version": "1.0.0",
+	"description": "Provides an api for the libraries of Trentino",
+	"private": true,
+	"license": "MIT",
+	"dependencies": {
+		"chrome-aws-lambda": "^1.17.1",
+		"puppeteer-core": "^1.17.0"
+	}
+}
