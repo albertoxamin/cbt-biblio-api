@@ -1,7 +1,7 @@
 const chrome = require('chrome-aws-lambda')
 const puppeteer = require('puppeteer-core')
 
-async function myloans(username, password) {
+async function newPage() {
 	const browser = await puppeteer.launch({
 		args: chrome.args,
 		executablePath: await chrome.executablePath,
@@ -18,6 +18,11 @@ async function myloans(username, password) {
 			req.continue()
 		}
 	})
+	return page
+}
+
+async function myloans(username, password) {
+	const page = await newPage()
 	await page.goto('http://www.cbt.biblioteche.provincia.tn.it/oseegenius/workspace?view=myloans')
 	await page.type('input[name=j_username]', username)
 	await page.type('input[name=j_password]', password)
@@ -44,15 +49,8 @@ async function myloans(username, password) {
 }
 
 async function search(searchTerm) {
-	const browser = await puppeteer.launch({
-		args: chrome.args,
-		executablePath: await chrome.executablePath,
-		headless: chrome.headless,
-	})
-
-	const page = await browser.newPage()
+	const page = await newPage()
 	await page.goto(`http://www.cbt.biblioteche.provincia.tn.it/oseegenius/search?q=${searchTerm.replace(' ', '+')}&s=25`)
-
 	await page.waitForSelector('.results')
 	const scrapedData = await page.evaluate(() =>
 		Array.from(document.querySelectorAll('.item'))

@@ -14,6 +14,10 @@
 		{
 			"src": "/myloans",
 			"dest": "/api.js"
+		},
+		{
+			"src": "/search",
+			"dest": "/api.js"
 		}
 	],
 	"regions": [
